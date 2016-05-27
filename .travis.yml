@@ -9,5 +9,4 @@ os:
   - linux
 script:
   - go build -race
-  - go test -v 
   - $HOME/gopath/bin/goveralls -service=travis-ci
