@@ -1,21 +1,22 @@
-/// Copyright 2016 Douglas Chimento.  All rights reserved.
+// Copyright 2016 Douglas Chimento.  All rights reserved.
 
 /*
 Package gworkspace provides access to toggl REST API
 
-Example:
-	import "github/dougEfresh/gtoggl"
-	import "github/dougEfresh/gtoggl/gworkspace"
 
-	func main() {
-		thc, err := gtoggl.NewClient("token")
-		...
-		wsc, err := gworkspace.NewClient(thc)
-		...
-		workspaces,err := wsc.List()
-		if err == nil {
-			panic(err)
-		}
-	}
+Example:
+       import "gopkg.in/dougEfresh/gtoggl.v8"
+       import "ggopkg.in/dougEfresh/toggl-workspace.v8"
+
+       func main() {
+	    thc, err := gtoggl.NewClient("token")
+	    ...
+	    tc, err := gworkspace.NewClient(thc)
+	    ...
+	    workspace,err := tc.Get(1)
+	    if err == nil {
+	 	panic(err)
+	   }
+       }
 */
 package gworkspace
