@@ -2,24 +2,17 @@ package gworkspace
 
 import (
 	"github.com/dougEfresh/toggl-test"
-	"os"
 	"testing"
 )
 
-var _, debugMode = os.LookupEnv("GTOGGL_TEST_DEBUG")
-
-func workspaceClient() *WorkspaceClient {
-	tu := &gtest.TestUtil{Debug: debugMode}
-	client := tu.MockClient()
-	ws, err := NewClient(client)
-	if err != nil {
-		panic(err)
-	}
-	return ws
+func workspaceClient(t *testing.T) *WorkspaceClient {
+	tu := &gtest.TestUtil{}
+	client := tu.MockClient(t)
+	return NewClient(client)
 }
 
 func TestWorkspaceList(t *testing.T) {
-	workspaceClient := workspaceClient()
+	workspaceClient := workspaceClient(t)
 	workspaces, err := workspaceClient.List()
 	if err != nil {
 		t.Fatal(err)
@@ -50,7 +43,7 @@ func TestWorkspaceList(t *testing.T) {
 }
 
 func TestWorkspaceGet(t *testing.T) {
-	workspaceClient := workspaceClient()
+	workspaceClient := workspaceClient(t)
 
 	workspace, err := workspaceClient.Get(1)
 	if err != nil {
@@ -62,7 +55,7 @@ func TestWorkspaceGet(t *testing.T) {
 }
 
 func TestWorkspaceUpdate(t *testing.T) {
-	workspaceClient := workspaceClient()
+	workspaceClient := workspaceClient(t)
 	workspace, err := workspaceClient.Get(1)
 
 	if err != nil {
