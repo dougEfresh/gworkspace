@@ -3,7 +3,7 @@ package gworkspace
 import (
 	"encoding/json"
 	"fmt"
-	"gopkg.in/dougEfresh/gtoggl.v8"
+	"gopkg.in/dougEfresh/toggl-http-client.v8"
 )
 
 type Workspace struct {
@@ -19,22 +19,16 @@ const Endpoint = "/workspaces"
 //Return a Workspace Cilent. An error is also returned when some configuration option is invalid
 //    tc,err := gtoggl.NewClient("token")
 //    wsc,err := gtoggl.NewWorkspaceClient(tc)
-func NewClient(tc *gtoggl.TogglHttpClient, options ...WorkspaceClientOptionFunc) (*WorkspaceClient, error) {
+func NewClient(tc *ghttp.TogglHttpClient) *WorkspaceClient {
 	ws := &WorkspaceClient{
 		tc: tc,
 	}
-	// Run the options on it
-	for _, option := range options {
-		if err := option(ws); err != nil {
-			return nil, err
-		}
-	}
 	ws.endpoint = tc.Url + Endpoint
-	return ws, nil
+	return ws
 }
 
 type WorkspaceClient struct {
-	tc       *gtoggl.TogglHttpClient
+	tc       *ghttp.TogglHttpClient
 	endpoint string
 }
 
@@ -68,7 +62,7 @@ func workspaceResponse(response *json.RawMessage, error error) (*Workspace, erro
 	if error != nil {
 		return nil, error
 	}
-	var tResp gtoggl.TogglResponse
+	var tResp ghttp.TogglResponse
 	var ws Workspace
 	err := json.Unmarshal(*response, &tResp)
 	if err != nil {

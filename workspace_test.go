@@ -1,7 +1,7 @@
 package gworkspace
 
 import (
-	"github.com/dougEfresh/gtest"
+	"github.com/dougEfresh/toggl-test"
 	"os"
 	"testing"
 )
