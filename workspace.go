@@ -54,6 +54,9 @@ func (wc *WorkspaceClient) List() (Workspaces, error) {
 	if err != nil {
 		return workspaces, err
 	}
+	if body == nil {
+		return nil,nil
+	}
 	err = json.Unmarshal(*body, &workspaces)
 	return workspaces, err
 }
@@ -61,6 +64,9 @@ func (wc *WorkspaceClient) List() (Workspaces, error) {
 func workspaceResponse(response *json.RawMessage, error error) (*Workspace, error) {
 	if error != nil {
 		return nil, error
+	}
+	if response == nil {
+		return nil,nil
 	}
 	var tResp ghttp.TogglResponse
 	var ws Workspace
