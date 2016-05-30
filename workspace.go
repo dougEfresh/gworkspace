@@ -39,7 +39,7 @@ func (wc *WorkspaceClient) Get(id uint64) (*Workspace, error) {
 
 //PUT https://www.toggl.com/api/v8/workspaces
 func (wc *WorkspaceClient) Update(ws *Workspace) (*Workspace, error) {
-	put := workspace_update_request{Workspace: ws}
+	put := map[string]interface{}{"workspace":ws}
 	body, err := json.Marshal(put)
 	if err != nil {
 		return nil, err
@@ -79,18 +79,4 @@ func workspaceResponse(response *json.RawMessage, error error) (*Workspace, erro
 		return nil, err
 	}
 	return &ws, err
-}
-
-//Configures a Client.
-/*
-    func SetURL(url string) WorkspaceClientOptionFunc {
-	return func(c *WorkspaceClient) error {
-	    c.Url = url
-	}
-    }
-*/
-type WorkspaceClientOptionFunc func(*WorkspaceClient) error
-
-type workspace_update_request struct {
-	Workspace *Workspace `json:"workspace"`
 }
