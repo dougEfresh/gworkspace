@@ -39,7 +39,7 @@ func (wc *WorkspaceClient) Get(id uint64) (*Workspace, error) {
 
 //PUT https://www.toggl.com/api/v8/workspaces
 func (wc *WorkspaceClient) Update(ws *Workspace) (*Workspace, error) {
-	put := map[string]interface{}{"workspace":ws}
+	put := map[string]interface{}{"workspace": ws}
 	body, err := json.Marshal(put)
 	if err != nil {
 		return nil, err
@@ -55,7 +55,7 @@ func (wc *WorkspaceClient) List() (Workspaces, error) {
 		return workspaces, err
 	}
 	if body == nil {
-		return nil,nil
+		return nil, nil
 	}
 	err = json.Unmarshal(*body, &workspaces)
 	return workspaces, err
@@ -66,7 +66,7 @@ func workspaceResponse(response *json.RawMessage, error error) (*Workspace, erro
 		return nil, error
 	}
 	if response == nil {
-		return nil,nil
+		return nil, nil
 	}
 	var tResp ghttp.TogglResponse
 	var ws Workspace
